@@ -38,11 +38,11 @@ export class AppComponent {
   public testInt() {
     this.intValue = 10;
   }
-  testString() {
+  public testString() {
     this.stringValue = 'siddhartha';
   }
 }
-/*
+/*d
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
