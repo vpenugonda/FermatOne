@@ -4,6 +4,16 @@ export class Hero {
   id: number;
   name: string;
 }
+export class Email {
+  constructor(
+    public sname: string,
+    public semail: string,
+    public rname: string,
+    public remail: string,
+    public subject: string,
+    public message: string
+  ) { }
+}
 
 const HEROES: Hero[] = [
   { id: 11, name: 'First Person Name' },
@@ -25,24 +35,36 @@ const HEROES: Hero[] = [
 })
 export class AppComponent {
   name = 'World';
-  title = 'Unit Testing';
+  title = 'Email Form';
   heroes = HEROES; // heroes is a variable that using constant "HEROES"
-  intValue: number;
-  stringValue: string;
-  selectedHero: Hero; // to get the selected hero details and created a property for selectedHero.
-  onSelect(hero: Hero): void {
-      this.selectedHero = hero;
+  subjects = ['Time Sheet', 'Work Log', 'Casual', 'Sick Leave', 'Late to Office'];
+  submitted = false;
+  emails = new Email('siddhartha', 'sidp@fcm.com', 'Reciever Name', 'reciever@fcm.com', this.subjects[1], 'Message goes here...');
+  // emails = new Email('', '', '', '', '', '');
+  onSubmit() { this.submitted = true; }
+  emailsDefault() {
+    new Email('siddhartha', 'sidp@fcm.com', 'Reciever Name', 'reciever@fcm.com', this.subjects[1], 'Message goes here...');
   }
-
-
-  public testInt() {
-    this.intValue = 10;
+  newEmail() {
+    this.emails = new Email('', '', '', '', '', '');
   }
-  public testString() {
-    this.stringValue = 'siddhartha';
-  }
+  // showFormControls(form: any) {
+  //   return form && form.controls['sname'] && form.controls['sname'].value && form.controls['semail'].value;
+  // }
+  // // intValue: number;
+  // stringValue: string;
+  // selectedHero: Hero; // to get the selected hero details and created a property for selectedHero.
+  // onSelect(hero: Hero): void {
+  //     this.selectedHero = hero;
+  // }
+  // public testInt() {
+  //   this.intValue = 10;
+  // }
+  // public testString() {
+  //   this.stringValue = 'siddhartha';
+  // }
 }
-/*d
+/*
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
