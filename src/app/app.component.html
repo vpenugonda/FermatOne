@@ -28,14 +28,101 @@
   </div>
 </div>
 -->
+<!--<div>-->
+<!--<button id="button1" (click)="testInt()">Test Integer</button>-->
+<!--<label class="intvalue">{{intValue}}</label>-->
+<!--</div>-->
+<!--<br>-->
+<!--<div>-->
+<!--<button class="button2" (click)="testString()">Test String</button>-->
+<!--<label class="stringvalue">{{stringValue}}</label>-->
+<!--</div>-->
 
-<h1>{{title}}</h1>
-<div>
-  <button id="button1" (click)="testInt()">Test Integer</button>
-  <label class="intvalue">{{intValue}}</label>
+<div class="container">
+  <img src="../src/img/logo.gif" alt="logo"/>
+  <h1>{{title}}</h1>
+
+  <div [hidden]="submitted">
+    <form (ngSubmit)="onSubmit()" #emailForm="ngForm">
+      <div class="form-group">
+        <label for name="sname"> Sender Name </label>
+        <input type="text" class="form-control" id="sname" required
+               [(ngModel)]="emails.sname" name="sname" #sname="ngModel"/>
+        <div [hidden]="sname.valid" class="alert alert-danger"> *Sender Name is required.</div>
+      </div>
+      <div class="form-group">
+        <label for name="semail"> Sender Email </label>
+        <input type="email" class="form-control" id="semail" required
+              [(ngModel)]="emails.semail" name="semail" #semail="ngModel"/>
+        <div [hidden]="semail.valid" class="alert alert-danger"> *Sender Email address is required.</div>
+      </div>
+      <div class="form-group">
+        <label for name="rname"> Reciever Name </label>
+        <input type="text" class="form-control" id="rname" required
+              [(ngModel)]="emails.rname" name="rname" #rname="ngModel"/>
+        <div [hidden]="rname.valid" class="alert alert-danger"> *Reciever name is required.</div>
+      </div>
+      <div class="form-group">
+        <label for name="remail"> Reciever Email </label>
+        <input type="email" class="form-control" id="remail" required
+           [(ngModel)]="emails.remail" name="remail" #remail="ngModel" />
+        <div [hidden]="remail.valid" class="alert alert-danger"> *Reciever Email address is required. </div>
+      </div>
+      <div class="form-group">
+        <label for name="subject"> Subject </label>
+        <!--Subjects are auto populating from typescript class.-->
+        <select class="form-control" id="subject" required
+            [(ngModel)]="emails.subject" name="subject" #subject="ngModel">
+          <option *ngFor="let sub of subjects" [value]="sub">
+            {{sub}}
+          </option>
+        </select>
+        <div [hidden]="subject.valid" class="alert alert-danger">* select Subject from dropdown and it is required.</div>
+      </div>
+      <div class="form-group">
+        <label for name="message"> Message </label>
+        <textarea class="form-control" rows="5" id="message" name="message" required
+        [(ngModel)]="emails.message" #message="ngModel"> </textarea>
+      </div>
+      <div class="btn-toolbar">
+        <button type="submit" class="btn btn-success" [disabled]="!emailForm.form.valid"> Submit</button>
+        <button type="reset" class="btn btn-danger" (click)="newEmail();emailForm.reset()"> New Email with reset </button>
+        <button type="button" class="btn btn-default" (click)="newEmail()">New Email <i>Without</i> Reset</button>
+      </div>
+
+      <hr>
+    </form>
+  </div>
+
+  <div [hidden]="!submitted" class="submittedDetails">
+    <h2> Submitted details are : </h2>
+    <div class="row">
+      <div class="col-xs-3">Sender Name: </div>
+      <div class="col-xs-9 pull-left text-info">{{emails.sname}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Sender Email: </div>
+      <div class="col-xs-9 pull-left text-info">{{emails.semail}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Reciever Name: </div>
+      <div class="col-xs-9 pull-left text-info">{{emails.rname}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Reciever Email: </div>
+      <div class="col-xs-9 pull-left text-info">{{emails.remail}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Subject: </div>
+      <div class="col-xs-9 pull-left text-info">{{emails.subject}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Message: </div>
+      <div class="col-xs-9 pull-left text-info">{{emails.message}}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+  </div>
+
 </div>
-<br>
-<div>
-  <button class="button2" (click)="testString()">Test String</button>
-  <label class="stringvalue">{{stringValue}}</label>
-</div>
+
